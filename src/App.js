@@ -2,7 +2,7 @@ import React from 'react';
 
 import MobileCompany from './components/MobileCompany'
 let mock = require ('./mock.json')
-let companyName = 'Velcome'
+let companyName = 'Velcom'
 
 class App extends React.PureComponent {
   render() {

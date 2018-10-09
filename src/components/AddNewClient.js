@@ -54,7 +54,7 @@ class AddNewClient extends React.PureComponent {
           }
               break;
           case 'balance':
-          if (/^\d+$/.test(value)) {
+          if (/^-?\d*\.?\d+$/.test(value)) {
             newErrors[3] = false
             this.setState({errors : newErrors})
           } 
