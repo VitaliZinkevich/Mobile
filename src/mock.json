@@ -1,0 +1,6 @@
+[ 
+    {"id":100, "lastName":"Иванов", "firstName":"Иван", "fatherName":"Иванович", "balance":200}, 
+    {"id":105, "lastName":"Сидоров", "firstName":"Сидор", "fatherName":"Сидорович", "balance":250}, 
+    {"id":110, "lastName":"Петров", "firstName":"Пётр", "fatherName":"Петрович", "balance":180},
+    {"id":120, "lastName":"Григорьев", "firstName":"Григорий", "fatherName":"Григорьевич", "balance":220}
+  ]
