@@ -50,14 +50,14 @@ saveNewData=()=>{
     return (
       <tr className='edit' >
       <td className=''>
-      <input size="4" name='lastName' onChange={this.handleChange} value={this.state.FIO.lastName}/></td>
+      <input size="3" name='lastName' onChange={this.handleChange} value={this.state.FIO.lastName}/></td>
       <td className=''>
-      <input size="3" name='firstName' onChange={this.handleChange} value={this.state.FIO.firstName}/></td>
+      <input size="2" name='firstName' onChange={this.handleChange} value={this.state.FIO.firstName}/></td>
       <td className=''>
-      <input size="3" name='fatherName' onChange={this.handleChange} value={this.state.FIO.fatherName}/></td>
+      <input size="4" name='fatherName' onChange={this.handleChange} value={this.state.FIO.fatherName}/></td>
 
       <td className=''>
-      <input size="2" name='balance' onChange={this.handleChange} value={this.state.balance}/></td>
+      <input size="1" name='balance' onChange={this.handleChange} value={this.state.balance}/></td>
         {this.state.balance > 0 ? 
         <td className='bg-success '>active</td>:
         <td className='bg-danger '>blocked</td>}
