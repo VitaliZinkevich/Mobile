@@ -1,27 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 //import './EditedClient.css'
 
 import {editClient} from '../events'
 
 class EditedClient extends React.PureComponent {
 
-static propTypes = {
-        id: PropTypes.number.isRequired,
-        FIO:PropTypes.shape({
-          lastName: PropTypes.string.isRequired,
-          firstName: PropTypes.string.isRequired,
-          fatherName: PropTypes.string.isRequired,
-        }),
-        balance: PropTypes.number.isRequired,
-      };
+// static propTypes = {
+//         id: PropTypes.number.isRequired,
+//         FIO:PropTypes.shape({
+//           lastName: PropTypes.string.isRequired,
+//           firstName: PropTypes.string.isRequired,
+//           fatherName: PropTypes.string.isRequired,
+//         }),
+//         balance: PropTypes.number.isRequired,
+//       };
     
-      state = {
-        FIO: this.props.FIO,
-        balance: this.props.balance,
-        id:this.props.id
-        
-    };
+constructor(props) {
+  super(props);
+  // Don't call this.setState() here!
+  let jsClient = this.props.client.toJS()
+  this.state = { client: jsClient };
+ 
+}
 
 cancel=()=>{
     editClient.emit ('cancelEditClient')
@@ -46,18 +47,18 @@ saveNewData=()=>{
 }
 
   render() {
-    console.log (`render EDIT_CLIENT ${this.props.id}`)
+    console.log (`render EDIT_CLIENT ${this.state.client.id}`)
     return (
       <tr className='edit' >
       <td className=''>
-      <input size="3" name='lastName' onChange={this.handleChange} value={this.state.FIO.lastName}/></td>
+      <input size="3" name='lastName' onChange={this.handleChange} value={this.state.client.lastName}/></td>
       <td className=''>
-      <input size="2" name='firstName' onChange={this.handleChange} value={this.state.FIO.firstName}/></td>
+      <input size="2" name='firstName' onChange={this.handleChange} value={this.state.client.firstName}/></td>
       <td className=''>
-      <input size="4" name='fatherName' onChange={this.handleChange} value={this.state.FIO.fatherName}/></td>
+      <input size="4" name='fatherName' onChange={this.handleChange} value={this.state.client.fatherName}/></td>
 
       <td className=''>
-      <input size="1" name='balance' onChange={this.handleChange} value={this.state.balance}/></td>
+      <input size="1" name='balance' onChange={this.handleChange} value={this.state.client.balance}/></td>
         {this.state.balance > 0 ? 
         <td className='bg-success '>active</td>:
         <td className='bg-danger '>blocked</td>}
