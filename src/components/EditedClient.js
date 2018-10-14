@@ -59,7 +59,7 @@ saveNewData=()=>{
 
       <td className=''>
       <input size="1" name='balance' onChange={this.handleChange} value={this.state.client.balance}/></td>
-        {this.state.balance > 0 ? 
+        {this.state.client.balance > 0 ? 
         <td className='bg-success '>active</td>:
         <td className='bg-danger '>blocked</td>}
         <td className=''><button onClick={this.saveNewData}>Сохранить</button></td>

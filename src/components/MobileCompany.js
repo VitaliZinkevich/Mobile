@@ -2,8 +2,6 @@ import React from 'react';
 
 //import PropTypes from 'prop-types';
 
-
-
 import MobileCompanyClients from './MobileCompanyClients'
 import AddingNewClient from './AddNewClient'
 import EditedClient from './EditedClient'
@@ -11,6 +9,10 @@ import EditedClient from './EditedClient'
 import { addNewClient, deleteClient, editClient } from '../events';
 
 class MobileCompany extends React.PureComponent {
+
+ // You can also declare that a prop is an instance of a class. This uses
+  // JS's instanceof operator.
+//   optionalMessage: PropTypes.instanceOf(Message),
 
     // static propTypes = {
     //     name: PropTypes.string.isRequired,
