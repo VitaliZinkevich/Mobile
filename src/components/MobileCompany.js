@@ -1,6 +1,8 @@
 import React from 'react';
 
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+
 
 import MobileCompanyClients from './MobileCompanyClients'
 import AddingNewClient from './AddNewClient'
@@ -10,35 +12,29 @@ import { addNewClient, deleteClient, editClient } from '../events';
 
 class MobileCompany extends React.PureComponent {
 
- // You can also declare that a prop is an instance of a class. This uses
-  // JS's instanceof operator.
-//   optionalMessage: PropTypes.instanceOf(Message),
-
-    // static propTypes = {
-    //     name: PropTypes.string.isRequired,
-    //     clients: PropTypes.arrayOf(
-    //         PropTypes.shape({
-    //             id: PropTypes.number.isRequired,
-    //             lastName: PropTypes.string.isRequired,
-    //             firstName: PropTypes.string.isRequired,
-    //             fatherName: PropTypes.string.isRequired,
-    //             balance: PropTypes.number.isRequired,
-    //         })
-    //     ),
-    // };
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+        clients: ImmutablePropTypes.listOf(
+            ImmutablePropTypes.contains({
+                id: PropTypes.number.isRequired,
+                lastName: PropTypes.string.isRequired,
+                firstName: PropTypes.string.isRequired,
+                fatherName: PropTypes.string.isRequired,
+                balance: PropTypes.number.isRequired,
+            })
+        ),
+    };
 
     constructor(props) {
         super(props);
-        // Don't call this.setState() here!
+  
+        this.state = {
+            name: this.props.name,
+            clients: this.props.clients,
+            notFiltredСlients: this.props.clients,
+            editId: null,
+            addingNewClient: false}
         
-       
-      
-        
-        this.state = {name: this.props.name,
-             clients: this.props.clients,
-             editId: null}
-        
-       
       }
 
 
@@ -80,10 +76,9 @@ class MobileCompany extends React.PureComponent {
     }
 
     newClientRecived = (client) => {
-        console.log(client)
-        let newClients = [...this.state.clients]
-        newClients.push(client)
-        this.setState({ clients: newClients, addingNewClient: false })
+       
+        let newClients = this.state.clients.push(client)
+        this.setState({ clients: newClients, addingNewClient: false, notFiltredСlients: newClients})
     }
 
 
@@ -93,15 +88,15 @@ class MobileCompany extends React.PureComponent {
 
     deleteOneClient = (id) => {
 
-        let newClients = [...this.state.clients].filter((client) => {
-            if (client.id === id) {
+        let newClients = this.state.clients.filter((client) => {
+            if (client.get('id') === id) {
                 return false
             } else {
                 return true
             }
         })
 
-        this.setState({ clients: newClients })
+        this.setState({ clients: newClients, notFiltredСlients: newClients })
 
     }
 
@@ -114,10 +109,12 @@ class MobileCompany extends React.PureComponent {
     }
 
     saveEditOneClient = (client) => {
-        let newClients = [...this.state.clients]
+        
+        let newClients = this.state.clients
 
         newClients = newClients.map((c) => {
-            if (c.id === client.id) {
+            
+            if (c.get('id') === client.get('id')) {
                 return client
             } else {
                 return c
@@ -125,18 +122,18 @@ class MobileCompany extends React.PureComponent {
 
         })
 
-        this.setState({ clients: newClients, editId: null })
+        this.setState({ clients: newClients, editId: null,notFiltredСlients: newClients })
     }
 
     filterAll = () => {
-        this.setState({ clients: this.props.clients })
+        this.setState({ clients: this.state.notFiltredСlients })
     }
 
     filterActive = () => {
 
-        let active = [...this.props.clients]
+        let active = this.state.notFiltredСlients
         active = active.filter((c) => {
-            if (c.balance > 0) {
+            if (c.get('balance') > 0) {
                 return true
             } else {
                 return false
@@ -147,9 +144,9 @@ class MobileCompany extends React.PureComponent {
     }
 
     filterBanned = () => {
-        let banned = [...this.props.clients]
+        let banned = this.state.notFiltredСlients
         banned = banned.filter((c) => {
-            if (c.balance <= 0) {
+            if (c.get('balance') <= 0) {
                 return true
             } else {
                 return false
@@ -163,12 +160,9 @@ class MobileCompany extends React.PureComponent {
 
     render() {
         console.log('render COMPANY component')
-        
-        
+                
         let newClientList = this.state.clients
-        
-        
-        
+               
         let newClientListView = newClientList.map((client) => {
         
         if (client.get('id') === this.state.editId){
@@ -184,19 +178,8 @@ class MobileCompany extends React.PureComponent {
                 client={client}
             />)
         }    
-         
-
-
-        //     if (this.state.editId === client.id) {
-               
-        //         // return (<EditedClient
-        //         //     client={client}
-        //         // />)
-        //     } else {
-        //         client = {client}
-        //         return ()
-        //     }
-        })
+     
+    })
 
 
 
@@ -217,7 +200,7 @@ class MobileCompany extends React.PureComponent {
                 </div>
 
                 <div className='col-12'>
-                    <table className='table w-100'>
+                    <table className='table'>
                         <thead>
                             <tr>
                                 <th>Фамилия</th>

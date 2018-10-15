@@ -1,4 +1,5 @@
 import React from 'react';
+import {fromJS} from 'immutable'
 //import PropTypes from 'prop-types';
 //import './EditedClient.css'
 
@@ -18,9 +19,11 @@ class EditedClient extends React.PureComponent {
     
 constructor(props) {
   super(props);
-  // Don't call this.setState() here!
+  
   let jsClient = this.props.client.toJS()
-  this.state = { client: jsClient };
+
+  this.state = {
+    client: jsClient };
  
 }
 
@@ -29,20 +32,16 @@ cancel=()=>{
 }
 
 handleChange = (e)=>{
-    if (e.target.name === 'balance') {
-        this.setState ({balance: e.target.value})
-    } else {
-    
-        let newData = {...this.state.FIO, [e.target.name]: e.target.value}
-        this.setState ({FIO: newData})
-
-    }
-    
+  let newData = {...this.state.client}
+  newData[e.target.name]=e.target.value
+  this.setState({client: newData})
+   
 }
 
 saveNewData=()=>{
 
-    let editedClient = {...this.state.FIO, id: this.state.id, balance: this.state.balance}
+    let editedClient = {...this.state.client}
+    editedClient = fromJS(editedClient)
     editClient.emit ('saveEditClient', editedClient)
 }
 

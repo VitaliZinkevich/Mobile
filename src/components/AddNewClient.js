@@ -1,5 +1,6 @@
 import React from 'react';
 import {addNewClient} from '../events';
+import {fromJS} from 'immutable'
 
 class AddNewClient extends React.PureComponent {
 
@@ -86,6 +87,7 @@ class AddNewClient extends React.PureComponent {
     addNew=(e)=>{
         e.preventDefault()
         let newOne ={...this.state.newClient, id: Math.floor (Math.random()*1000)}
+        newOne= fromJS(newOne)
         addNewClient.emit ('addingNewClient', newOne)
     }
 
@@ -93,35 +95,35 @@ class AddNewClient extends React.PureComponent {
   render() {
     console.log ('render ADD CLIENT component')
        return (
-           <div>
+           <div className='mt-2'>
                 <form>
-                    <div>
-                        <span>Имя</span><input onChange={this.handleChange} name='firstName'/>
+                    <div className='mt-1'>
+                        <span className='mx-1'>Имя</span><input onChange={this.handleChange} name='firstName'/>
                         {this.state.errors[0] === true ?
-                        <div className='bg-danger'>Только текст кирилицей без пробелов</div>:
+                        <div className='bg-danger my-1'>Только текст кирилицей без пробелов</div>:
                         null}
                     </div>
           
-                    <div>
-                        <span>Фамилия</span><input onChange={this.handleChange} name='lastName'/>
+                    <div className='mt-1'>
+                        <span className='mx-1'>Фамилия</span><input onChange={this.handleChange} name='lastName'/>
                         {this.state.errors[1] === true ?
-                        <div className='bg-danger'>Только текст кирилицей без пробелов</div>:
+                        <div className='bg-danger my-1'>Только текст кирилицей без пробелов</div>:
                         null}
                     </div>
-                    <div>
-                        <span>Отчество</span><input onChange={this.handleChange} name='fatherName'/>
+                    <div className='mt-1'>
+                        <span className='mx-1'>Отчество</span><input onChange={this.handleChange} name='fatherName'/>
                         {this.state.errors[2] === true ?
-                        <div className='bg-danger'>Только текст кирилицей без пробелов</div>:
+                        <div className='bg-danger my-1'>Только текст кирилицей без пробелов</div>:
                         null}
                     </div>
-                    <div>
-                        <span>Баланс</span><input onChange={this.handleChange} name='balance'/>
+                    <div className='my-1'>
+                        <span className='mx-1'>Баланс</span><input onChange={this.handleChange} name='balance'/>
                         {this.state.errors[3] === true ?
-                        <div className='bg-danger'>Только число</div>:
+                        <div className='bg-danger my-1'>Только число</div>:
                         null}
                     </div>
-                    <button disabled={this.state.blockAddButton} onClick={this.addNew}>Добавить</button>
-                    <button onClick={this.cancelAdding}>Отмена</button>
+                    <button className='mt-1 mx-1 btn btn-success' disabled={this.state.blockAddButton} onClick={this.addNew}>Добавить</button>
+                    <button  className='mt-1 mx-1 btn btn-danger' onClick={this.cancelAdding}>Отмена</button>
 
                 </form>
            </div>

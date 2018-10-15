@@ -8,10 +8,10 @@ let companyName = 'Velcom' // всегда иммутабельно
 class App extends React.PureComponent {
   render() {
     let immutableMock =fromJS (mock)
-    //console.log (immutableMock.get (0))
-
+    
     console.log ('render APP component')
-       return (
+    
+    return (
       <MobileCompany 
       name ={companyName}
       clients ={immutableMock}
