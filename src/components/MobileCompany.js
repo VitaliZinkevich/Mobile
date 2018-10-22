@@ -189,13 +189,13 @@ class MobileCompany extends React.PureComponent {
 
                 <div className='col-12'>
                     <button onClick={this.setNameVelcome}>Velcom</button>
-                    <button onClick={this.setNameMTS}>MTS</button>
-                    <div>Компания: {this.state.name}</div>
+                    <button id='nameMts'onClick={this.setNameMTS}>MTS</button>
+                    <div id='companyName'>Компания: {this.state.name}</div>
 
                     <hr />
-                    <button onClick={this.filterAll}>Все</button>
-                    <button onClick={this.filterActive}>Активные</button>
-                    <button onClick={this.filterBanned}>Заблокированные</button>
+                    <button onClick={this.filterAll} className='allFilter'>Все</button>
+                    <button onClick={this.filterActive} className='activeFilter'>Активные</button>
+                    <button onClick={this.filterBanned} className='bannedFilter'>Заблокированные</button>
                     <hr />
                 </div>
 
@@ -222,7 +222,7 @@ class MobileCompany extends React.PureComponent {
                 </div>
 
                 <div className='col-12'>
-                    <button onClick={this.addingNewClient}>Добавить клиента </button>
+                    <button className='addButton' onClick={this.addingNewClient}>Добавить клиента </button>
 
                     {this.state.addingNewClient === true ?
                         <AddingNewClient /> :

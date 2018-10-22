@@ -48,7 +48,7 @@ saveNewData=()=>{
   render() {
     console.log (`render EDIT_CLIENT ${this.state.client.id}`)
     return (
-      <tr className='edit' >
+      <tr className='edit testRenderEdited' >
       <td className=''>
       <input size="3" name='lastName' onChange={this.handleChange} value={this.state.client.lastName}/></td>
       <td className=''>

@@ -95,7 +95,7 @@ class AddNewClient extends React.PureComponent {
   render() {
     console.log ('render ADD CLIENT component')
        return (
-           <div className='mt-2'>
+           <div className='mt-2 addClientForm'>
                 <form>
                     <div className='mt-1'>
                         <span className='mx-1'>Имя</span><input onChange={this.handleChange} name='firstName'/>
@@ -122,7 +122,7 @@ class AddNewClient extends React.PureComponent {
                         <div className='bg-danger my-1'>Только число</div>:
                         null}
                     </div>
-                    <button className='mt-1 mx-1 btn btn-success' disabled={this.state.blockAddButton} onClick={this.addNew}>Добавить</button>
+                    <button className='mt-1 mx-1 btn btn-success ' id='addNewClient' disabled={this.state.blockAddButton} onClick={this.addNew}>Добавить</button>
                     <button  className='mt-1 mx-1 btn btn-danger' onClick={this.cancelAdding}>Отмена</button>
 
                 </form>
